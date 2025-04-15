@@ -1,9 +1,9 @@
-import AspireLogo from "../assets/Logo.svg";
 import CardLogo from "../assets/Card.svg";
 import CreditLogo from "../assets/Credit.svg";
 import PaymentsLogo from "../assets/Payments.svg";
 import HomeLogo from "../assets/Home.svg";
 import AccountLogo from "../assets/Account.svg";
+import { AspireLogo } from "./Cards";
 
 const NavigationItem = ({ logo, label }: { logo: string; label: string }) => {
   return (
@@ -18,7 +18,7 @@ const NavigationBar = () => {
   return (
     <nav className="bg-[#0C365A] h-full text-white">
       <div className="pl-12 py-12 pr-[55px]">
-        <img src={AspireLogo} alt="Aspire Logo" />
+        <AspireLogo className="text-[#01D167]" />
         <p className="text-[15px] text-left opacity-30 mt-6">
           Trusted way of banking for 3,000+ SMEs and startups in Singapore
         </p>
