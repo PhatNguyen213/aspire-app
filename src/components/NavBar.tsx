@@ -16,7 +16,7 @@ const NavigationItem = ({ logo, label }: { logo: string; label: string }) => {
 
 const NavigationBar = () => {
   return (
-    <nav className="bg-[#0C365A] h-full">
+    <nav className="bg-[#0C365A] h-full text-white">
       <div className="pl-12 py-12 pr-[55px]">
         <img src={AspireLogo} alt="Aspire Logo" />
         <p className="text-[15px] text-left opacity-30 mt-6">
