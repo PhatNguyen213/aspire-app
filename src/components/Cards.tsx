@@ -1,6 +1,16 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import AddIcon from "../assets/box.svg";
 import VisaLogo from "../assets/Visa.svg";
+import EyeIcon from "../assets/remove_red_eye.svg";
+import DeactivateIcon from "../assets/Deactivate card.svg";
+import GPayIcon from "../assets/GPay.svg";
+import FreezeIcon from "../assets/Freeze card.svg";
+import ReplaceIcon from "../assets/Replace card.svg";
+import SpendLimitIcon from "../assets/Set spend limit.svg";
+import DownArrowIcon from "../assets/down-arrow.svg";
+import UpArrowIcon from "../assets/up-arrow.svg";
+import TransactionsIcon from "../assets/transactions.svg";
+import DetailsIcon from "../assets/card-details.svg";
 
 export const AspireLogo = ({ className }: { className: string }) => {
   return (
@@ -81,6 +91,66 @@ const Dot = () => (
   <span className="inline-block w-2.5 h-2.5 rounded-full bg-white" />
 );
 
+const VisaCard = () => {
+  return (
+    <div className="p-7 w-[414px] h-[248px] bg-[#01D167] rounded-lg flex flex-col justify-between">
+      <AspireLogo className="text-white ml-auto w-[85px] h-[25px]" />
+      <p className="text-left text-white font-bold tracking-[0.58px] text-2xl">
+        Mark Henry
+      </p>
+      <div className="flex gap-6 items-center">
+        <FourDotsGroup />
+        <FourDotsGroup />
+        <FourDotsGroup />
+        <p className="tracking-[3.46px] text-white text-[14px] font-bold">
+          2020
+        </p>
+      </div>
+      <div className="flex gap-2 items-center text-white text-[13px] leading-5 font-bold">
+        <span className="tracking-[0.31px]">Thru:</span>
+        <span className="tracking-[1.56px]">12/20</span>
+        <span className="ml-12 tracking-[0.31px]">CVV:</span>
+        <span className="text-[24px] tracking-[2.88px]">***</span>
+      </div>
+      <img src={VisaLogo} className="ml-auto" />
+    </div>
+  );
+};
+
+const ActionItem = ({ logo, text }: { logo: string; text: string }) => {
+  return (
+    <div className="flex flex-col max-w-[62px] items-center justify-center text-[13px] text-[#0C365A] gap-2">
+      <img src={logo} className="w-8 h-8" />
+      {text}
+    </div>
+  );
+};
+
+const Actions = () => {
+  return (
+    <div className="px-7 py-5 h-[116px] w-[414px] bg-[#EDF3FF] mt-[56px] rounded-2xl flex items-center justify-between">
+      <ActionItem logo={FreezeIcon} text="Freeze card" />
+      <ActionItem logo={SpendLimitIcon} text="Set spend limit" />
+      <ActionItem logo={GPayIcon} text="Add to GPay" />
+      <ActionItem logo={ReplaceIcon} text="Replace card" />
+      <ActionItem logo={DeactivateIcon} text="Cancel card" />
+    </div>
+  );
+};
+
+const DetailPanel = ({ logo, text }: { logo: string; text: string }) => {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="text-[14px] text-[#0C365A] flex items-center gap-3 p-7 w-[366px] rounded-lg min-w-[50%] h-[72px] bg-[#F5F9FF]">
+      <img src={logo} />
+      {text}
+      <button className="ml-auto" onClick={() => setExpanded((prev) => !prev)}>
+        <img src={expanded ? DownArrowIcon : UpArrowIcon} />
+      </button>
+    </div>
+  );
+};
+
 const Cards = () => {
   return (
     <main className="bg-white p-[3.75rem]">
@@ -89,25 +159,19 @@ const Cards = () => {
         <AddCardButton />
       </TopSection>
       <CardsDashBoard>
-        <div className="p-10 h-full grid grid-cols-2">
-          <div>
-            <div className="p-7 w-[414px] h-[248px] bg-[#01D167] rounded-lg flex flex-col justify-between">
-              <AspireLogo className="text-white ml-auto w-[85px] h-[25px]" />
-              <p className="text-left text-white font-bold tracking-wider text-2xl">
-                Mark Henry
-              </p>
-              <div className="flex gap-6 items-center">
-                <FourDotsGroup />
-                <FourDotsGroup />
-                <FourDotsGroup />
-                <p className="tracking-[3.46px] text-white text-[14px] font-bold">
-                  2020
-                </p>
-              </div>
-              <img src={VisaLogo} className="ml-auto" />
+        <div className="px-10 py-16 h-full grid grid-cols-[auto_1fr]">
+          <div className="relative">
+            <div className="absolute top-[-24px] right-0 text-[14px] mb-3 text-[#01D167] font-bold flex justify-end gap-1">
+              <img src={EyeIcon} />
+              Show card number
             </div>
+            <VisaCard />
+            <Actions />
           </div>
-          <div>Hello 1</div>
+          <div className="flex flex-col gap-6 px-[40px]">
+            <DetailPanel logo={DetailsIcon} text="Card details" />
+            <DetailPanel logo={TransactionsIcon} text="Recent transactions" />
+          </div>
         </div>
       </CardsDashBoard>
     </main>
