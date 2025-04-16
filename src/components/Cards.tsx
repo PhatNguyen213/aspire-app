@@ -11,6 +11,11 @@ import DownArrowIcon from "../assets/down-arrow.svg";
 import UpArrowIcon from "../assets/up-arrow.svg";
 import TransactionsIcon from "../assets/transactions.svg";
 import DetailsIcon from "../assets/card-details.svg";
+import BusinessIcon from "../assets/business-and-finance.svg";
+import FileStorageIcon from "../assets/file-storage.svg";
+import FlightIcon from "../assets/flights.svg";
+import MegaphoneIcon from "../assets/megaphone.svg";
+import NextIcon from "../assets/next.svg";
 
 export const AspireLogo = ({ className }: { className: string }) => {
   return (
@@ -138,15 +143,72 @@ const Actions = () => {
   );
 };
 
+const Transaction = ({
+  logo,
+  transactionText,
+}: {
+  logo: string;
+  transactionText: string;
+}) => {
+  return (
+    <div className="p-6 min-h-[100px]">
+      <div className="flex items-center gap-4">
+        <div className="w-[48px] h-[48px] flex items-center justify-center rounded-full bg-[#009DFF1A]">
+          <img src={logo} />
+        </div>
+        <div className="flex flex-col items-start">
+          <span className="text-[14px] font-semibold">Hamleys</span>
+          <span className="text-[13px] text-[#AAAAAA]">20 May 2020</span>
+        </div>
+        <span className="ml-auto text-[14px] font-bold text-[#01D167]">
+          + S$ 150
+        </span>
+        <img src={NextIcon} alt="Next" />
+      </div>
+      <div className="mt-3 pl-[64px] flex text-[#325BAF] text-[12px] font-semibold gap-2">
+        <div className="w-[24px] h-[20px] bg-[#325BAF] rounded-[12px] flex items-center justify-center">
+          <img className="w-[10px] h-[10px]" src={BusinessIcon} />
+        </div>
+        {transactionText}
+      </div>
+    </div>
+  );
+};
+
 const DetailPanel = ({ logo, text }: { logo: string; text: string }) => {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="text-[14px] text-[#0C365A] flex items-center gap-3 p-7 w-[366px] rounded-lg min-w-[50%] h-[72px] bg-[#F5F9FF]">
-      <img src={logo} />
-      {text}
-      <button className="ml-auto" onClick={() => setExpanded((prev) => !prev)}>
-        <img src={expanded ? DownArrowIcon : UpArrowIcon} />
-      </button>
+    <div className="w-[366px] min-w-[50%]">
+      <div className="h-[72px] shadow-[0_0_8px_#0000000A] text-[14px] text-[#0C365A] flex items-center gap-3 p-7 rounded-lg  bg-[#F5F9FF]">
+        <img src={logo} />
+        {text}
+        <button
+          className="ml-auto"
+          onClick={() => setExpanded((prev) => !prev)}
+        >
+          <img src={expanded ? DownArrowIcon : UpArrowIcon} />
+        </button>
+      </div>
+      {expanded ? (
+        <div className="border border-t-0 border-[#F0F0F0]">
+          <Transaction
+            logo={FileStorageIcon}
+            transactionText="Refund on debit card"
+          />
+          <Transaction
+            logo={FlightIcon}
+            transactionText="Charged to debit card"
+          />
+          <Transaction
+            logo={MegaphoneIcon}
+            transactionText="Charged to debit card"
+          />
+          <Transaction
+            logo={FileStorageIcon}
+            transactionText="Charged to debit card"
+          />
+        </div>
+      ) : null}
     </div>
   );
 };
