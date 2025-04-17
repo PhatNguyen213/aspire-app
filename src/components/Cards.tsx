@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { Children, ReactNode, useState } from "react";
 import AddIcon from "../assets/box.svg";
 import VisaLogo from "../assets/Visa.svg";
 import EyeIcon from "../assets/remove_red_eye.svg";
@@ -96,12 +96,12 @@ const Dot = () => (
   <span className="inline-block w-2.5 h-2.5 rounded-full bg-white" />
 );
 
-const VisaCard = () => {
+const VisaCard = ({ name, thru }: { name: string; thru: string }) => {
   return (
     <div className="p-7 w-[414px] h-[248px] bg-[#01D167] rounded-lg flex flex-col justify-between">
       <AspireLogo className="text-white ml-auto w-[85px] h-[25px]" />
       <p className="text-left text-white font-bold tracking-[0.58px] text-2xl">
-        Mark Henry
+        {name}
       </p>
       <div className="flex gap-6 items-center">
         <FourDotsGroup />
@@ -113,7 +113,7 @@ const VisaCard = () => {
       </div>
       <div className="flex gap-2 items-center text-white text-[13px] leading-5 font-bold">
         <span className="tracking-[0.31px]">Thru:</span>
-        <span className="tracking-[1.56px]">12/20</span>
+        <span className="tracking-[1.56px]">{thru}</span>
         <span className="ml-12 tracking-[0.31px]">CVV:</span>
         <span className="text-[24px] tracking-[2.88px]">***</span>
       </div>
@@ -125,7 +125,9 @@ const VisaCard = () => {
 const ActionItem = ({ logo, text }: { logo: string; text: string }) => {
   return (
     <div className="flex flex-col max-w-[62px] items-center justify-center text-[13px] text-[#0C365A] gap-2">
-      <img src={logo} className="w-8 h-8" />
+      <button>
+        <img src={logo} className="w-8 h-8" />
+      </button>
       {text}
     </div>
   );
@@ -175,7 +177,15 @@ const Transaction = ({
   );
 };
 
-const DetailPanel = ({ logo, text }: { logo: string; text: string }) => {
+const DetailPanel = ({
+  logo,
+  text,
+  disabled = false,
+}: {
+  logo: string;
+  text: string;
+  disabled?: boolean;
+}) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <div className="w-[366px] min-w-[50%]">
@@ -189,8 +199,12 @@ const DetailPanel = ({ logo, text }: { logo: string; text: string }) => {
           <img src={expanded ? DownArrowIcon : UpArrowIcon} />
         </button>
       </div>
-      {expanded ? (
-        <div className="border border-t-0 border-[#F0F0F0]">
+      <div
+        className={`grid grid-rows-[0fr] transition-[grid-template-rows] ease-out duration-500 ${
+          expanded && !disabled && "grid-rows-[1fr]"
+        }`}
+      >
+        <div className="overflow-hidden border border-t-0 border-[#F0F0F0]">
           <Transaction
             logo={FileStorageIcon}
             transactionText="Refund on debit card"
@@ -207,8 +221,11 @@ const DetailPanel = ({ logo, text }: { logo: string; text: string }) => {
             logo={FileStorageIcon}
             transactionText="Charged to debit card"
           />
+          <div className="bg-[#DDFFEC] rounded-lg border border-[#DDFFEC] text-[#01D167] text-[13px] font-semibold px-[103px] py-4">
+            View all card transactions
+          </div>
         </div>
-      ) : null}
+      </div>
     </div>
   );
 };
@@ -227,16 +244,54 @@ const Cards = () => {
               <img src={EyeIcon} />
               Show card number
             </div>
-            <VisaCard />
+            <Carousel>
+              <VisaCard name="Mark Henry" thru="12/20" />
+              <VisaCard name="Phat Nguyen" thru="03/23" />
+              <VisaCard name="Jemery Lamp" thru="11/25" />
+            </Carousel>
             <Actions />
           </div>
           <div className="flex flex-col gap-6 px-[40px]">
-            <DetailPanel logo={DetailsIcon} text="Card details" />
+            <DetailPanel disabled logo={DetailsIcon} text="Card details" />
             <DetailPanel logo={TransactionsIcon} text="Recent transactions" />
           </div>
         </div>
       </CardsDashBoard>
     </main>
+  );
+};
+
+const CarouselDot = ({
+  index,
+  isActive,
+  onClick,
+}: {
+  isActive: boolean;
+  index: number;
+  onClick: (idx: number) => void;
+}) => {
+  return (
+    <button
+      onClick={onClick.bind(null, index)}
+      className={`w-2 h-2 p-0 opacity-20 bg-[#01D167] rounded-lg ${
+        isActive && "w-4 opacity-100"
+      }`}
+    />
+  );
+};
+
+const Carousel = ({ children }: { children: ReactNode }) => {
+  const [index, setIndex] = useState(0);
+  const onClick = (idx: number) => setIndex(idx);
+  return (
+    <div className="flex flex-col gap-3">
+      {Children.toArray(children)[index]}
+      <div className="flex items-center justify-center gap-2">
+        {Children.map(children, (_, idx) => (
+          <CarouselDot isActive={index === idx} index={idx} onClick={onClick} />
+        ))}
+      </div>
+    </div>
   );
 };
 
