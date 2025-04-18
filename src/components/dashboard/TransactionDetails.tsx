@@ -73,8 +73,9 @@ export const DetailPanel = ({
         }`}
       >
         <div className="overflow-hidden border border-t-0 border-[#F0F0F0]">
-          {transactions?.map(({ name, date, amount }) => (
+          {transactions?.map(({ name, date, amount }, index) => (
             <Transaction
+              key={index}
               name={name}
               date={date}
               amount={amount}

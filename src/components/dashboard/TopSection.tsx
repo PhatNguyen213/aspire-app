@@ -1,6 +1,8 @@
 import { Modal, Typography } from "@mui/material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AddIcon from "../../assets/box.svg";
+import { addNewCard } from "../../api/apiClient";
+import { CardInfo } from "../Cards";
 
 export const AspireLogo = ({ className }: { className: string }) => {
   return (
@@ -35,8 +37,14 @@ const AvailableBalance = () => {
   );
 };
 
-const AddCardButton = () => {
+const AddCardButton = ({ setData }: { setData: (data: CardInfo) => void }) => {
   const [open, setOpen] = useState(false);
+  const name = useRef<string>("");
+  const onSubmit = () => {
+    addNewCard(name.current)
+      .then(setData)
+      .then(() => setOpen(false));
+  };
   return (
     <>
       <Modal
@@ -52,9 +60,16 @@ const AddCardButton = () => {
           </Typography>
           <div className="flex items-center gap-3">
             <label htmlFor="name">Name:</label>
-            <input className="border min-w-[20rem] rounded-sm p-2" id="name" />
+            <input
+              onChange={(e) => (name.current = e.target.value)}
+              className="border min-w-[20rem] rounded-sm p-2"
+              id="name"
+            />
           </div>
-          <button className="px-3 py-2 w-fit bg-[#325BAF] font-semibold text-[13px] text-white">
+          <button
+            onClick={onSubmit}
+            className="px-3 py-2 w-fit bg-[#325BAF] font-semibold text-[13px] text-white"
+          >
             Submit
           </button>
         </div>
@@ -70,11 +85,15 @@ const AddCardButton = () => {
   );
 };
 
-export default function TopSection() {
+export default function TopSection({
+  setData,
+}: {
+  setData: (data: CardInfo) => void;
+}) {
   return (
     <div className="flex items-end text-left text-base">
       <AvailableBalance />
-      <AddCardButton />
+      <AddCardButton setData={setData} />
     </div>
   );
 }

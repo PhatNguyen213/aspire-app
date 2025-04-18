@@ -68,10 +68,11 @@ interface Card {
   id: string;
   name: string;
   thru: string;
+  number: string;
   transactions: Transaction[];
 }
 
-interface CardInfo {
+export interface CardInfo {
   balance: string;
   cards: Card[];
 }
@@ -92,7 +93,7 @@ const Cards = () => {
 
   return (
     <main className="bg-white p-[3.75rem]">
-      <TopSection />
+      <TopSection setData={setData} />
       <CardsDashBoard>
         <Carousel index={activeCard} selectCard={setActiveCard}>
           {cards?.map((card, index) => (
