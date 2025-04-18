@@ -3,7 +3,7 @@ import CreditLogo from "../assets/Credit.svg";
 import PaymentsLogo from "../assets/Payments.svg";
 import HomeLogo from "../assets/Home.svg";
 import AccountLogo from "../assets/Account.svg";
-import { AspireLogo } from "./Cards";
+import { AspireLogo } from "./dashboard/TopSection";
 
 const NavigationItem = ({ logo, label }: { logo: string; label: string }) => {
   return (

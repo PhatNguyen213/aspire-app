@@ -1,85 +1,12 @@
-import { Children, ReactNode, useState } from "react";
-import AddIcon from "../assets/box.svg";
 import VisaLogo from "../assets/Visa.svg";
-import EyeIcon from "../assets/remove_red_eye.svg";
-import DeactivateIcon from "../assets/Deactivate card.svg";
-import GPayIcon from "../assets/GPay.svg";
-import FreezeIcon from "../assets/Freeze card.svg";
-import ReplaceIcon from "../assets/Replace card.svg";
-import SpendLimitIcon from "../assets/Set spend limit.svg";
-import DownArrowIcon from "../assets/down-arrow.svg";
-import UpArrowIcon from "../assets/up-arrow.svg";
 import TransactionsIcon from "../assets/transactions.svg";
-import DetailsIcon from "../assets/card-details.svg";
-import BusinessIcon from "../assets/business-and-finance.svg";
-import FileStorageIcon from "../assets/file-storage.svg";
-import FlightIcon from "../assets/flights.svg";
-import MegaphoneIcon from "../assets/megaphone.svg";
-import NextIcon from "../assets/next.svg";
-
-export const AspireLogo = ({ className }: { className: string }) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="125"
-      height="35"
-      viewBox="0 0 125 35"
-      className={className}
-    >
-      <g transform="translate(0 0)">
-        <path
-          fill="currentcolor"
-          d="M17.845,35q-.133,0-.266,0a17.655,17.655,0,0,1-6.7-1.328A17.289,17.289,0,0,1,5.23,29.922a.291.291,0,0,1-.118-.191.312.312,0,0,1,.118-.207c.091-.089,2.452-2.583,5.185-5.471l.012-.013.019-.021c3.311-3.5,7.064-7.463,7.233-7.628a.225.225,0,0,1,.14-.074c.04,0,.064.027.064.074.089.108,12.079,12.991,12.45,13.231.055.054.077.1.063.141s-.073.059-.165.059a13.867,13.867,0,0,1-2.245,1.89A17.326,17.326,0,0,1,19.212,34.9,9.084,9.084,0,0,1,17.845,35Zm57.8-4.183H72.988c-.2,0-.2-.1-.2-.2v-19.8c0-.2.1-.2.2-.2h2.857c.2,0,.2.1.2.2V13.11A6.1,6.1,0,0,1,78.8,10.722a7.169,7.169,0,0,1,5.815.178A6.868,6.868,0,0,1,88.3,15.3a8.637,8.637,0,0,1-.612,6.565,6.376,6.376,0,0,1-5.1,3.481,6.72,6.72,0,0,1-1.144.1,6.652,6.652,0,0,1-2.529-.5,6.431,6.431,0,0,1-2.653-1.89.517.517,0,0,1-.1-.149.517.517,0,0,0-.1-.149v7.66C76.05,30.817,76.05,30.817,75.642,30.817ZM80.6,12.772v0A4.288,4.288,0,0,0,77.683,13.9a4.48,4.48,0,0,0-1.634,3.681,5.535,5.535,0,0,1,.2.994,4.588,4.588,0,0,0,4.491,3.979H80.8a4.539,4.539,0,0,0,4.229-2.786,4.88,4.88,0,0,0,.2-3.183,4.52,4.52,0,0,0-2.959-3.481,4.306,4.306,0,0,0-1.674-.336ZM63.4,25.688a9.524,9.524,0,0,1-5.613-1.835.283.283,0,0,1-.155-.164.439.439,0,0,1,.053-.333,6.851,6.851,0,0,0,.556-1.059,9.923,9.923,0,0,1,.464-.931,8.4,8.4,0,0,1,1.162.467,12.059,12.059,0,0,0,1.287.529,6.213,6.213,0,0,0,3.265.4,3.038,3.038,0,0,0,1.02-.3,1.429,1.429,0,0,0,.811-1.041,1.4,1.4,0,0,0-.4-1.246,2.436,2.436,0,0,0-1.122-.6,14.68,14.68,0,0,0-1.643-.57c-.354-.107-.687-.208-1.01-.326l-1.53-.6a3.936,3.936,0,0,1,.2-7.162,8.824,8.824,0,0,1,3.228-.608c.148,0,.3,0,.445.011A11.47,11.47,0,0,1,68.8,11.518c.252.1.378.147.407.231s-.048.213-.2.465l-.918,1.791a.667.667,0,0,0-.056.063c-.036.045-.062.077-.116.077a.326.326,0,0,1-.134-.041,9.288,9.288,0,0,0-3.979-1.194,2.732,2.732,0,0,0-1.532.2,1.3,1.3,0,0,0-.918,1.093,1.129,1.129,0,0,0,.612,1.293,8.109,8.109,0,0,0,2.143.9,13.1,13.1,0,0,1,2.551.9,5.662,5.662,0,0,1,1.428.9,3.77,3.77,0,0,1,1.326,3.481,3.982,3.982,0,0,1-2.856,3.483A9.5,9.5,0,0,1,63.4,25.688Zm-16.643-.271a6.025,6.025,0,0,1-2.338-.469,4.57,4.57,0,0,1-2.658-2.6,4.407,4.407,0,0,1,.208-3.666,4.353,4.353,0,0,1,2.857-2.089,9.534,9.534,0,0,1,2.347-.3h4.387c.122,0,.215-.037.239-.093a.1.1,0,0,0-.035-.106,3.571,3.571,0,0,0-.1-1.093,2.586,2.586,0,0,0-2.245-1.89,7.057,7.057,0,0,0-4.285.5,5.8,5.8,0,0,0-1.326.8.189.189,0,0,1-.127.065c-.064,0-.122-.054-.179-.164a18.589,18.589,0,0,1-1.123-1.891c-.054-.053-.077-.1-.063-.139s.073-.059.165-.059a12.006,12.006,0,0,1,6.4-1.837c.349,0,.7.015,1.051.046a5.737,5.737,0,0,1,2.244.6A4.96,4.96,0,0,1,55.029,14.9a26.217,26.217,0,0,1,.1,2.886v7.362c0,.2-.1.2-.2.2H52.171c-.2,0-.2-.1-.2-.2V23.556a8.449,8.449,0,0,1-4.285,1.789A6.089,6.089,0,0,1,46.754,25.416Zm.724-6.736a7.07,7.07,0,0,0-1.939.3,1.686,1.686,0,0,0-1.122,1.194,2.22,2.22,0,0,0,1.632,2.586,4.745,4.745,0,0,0,3.675-.4,2.822,2.822,0,0,0,1.836-2.886,1.709,1.709,0,0,0,.1-.6c0-.2-.1-.2-.2-.2Zm70.361,6.7a9.277,9.277,0,0,1-3.114-.536,6.622,6.622,0,0,1-4.489-5.373,7.328,7.328,0,0,1,.51-4.675,7.041,7.041,0,0,1,5.509-4.177,10.1,10.1,0,0,1,3.877.1,5.639,5.639,0,0,1,4.389,4.078,10.17,10.17,0,0,1,.408,4.278c0,.2-.1.2-.2.2h-5.511a34.077,34.077,0,0,0-4.589-.311c-.3,0-.615,0-.92.012a.249.249,0,0,0-.225.086.215.215,0,0,0,.021.212,4.662,4.662,0,0,0,4.558,3.482h.034q.1,0,.191,0a5.735,5.735,0,0,0,3.993-1.595.2.2,0,0,1,.153-.073.194.194,0,0,1,.153.073c.254.248.487.5.713.744s.461.5.717.748a.188.188,0,0,1,.075.149.192.192,0,0,1-.075.15,9.033,9.033,0,0,1-4.083,2.188A9.33,9.33,0,0,1,117.839,25.384Zm-.122-12.545a4.3,4.3,0,0,0-2.515.8,4.138,4.138,0,0,0-1.7,2.85c-.04.076-.05.125-.032.154s.114.044.236.044h8.163c.2,0,.2-.1.2-.2a4.665,4.665,0,0,0-.714-2.089A3.849,3.849,0,0,0,118.5,12.91,4.366,4.366,0,0,0,117.717,12.839ZM95.164,25.248l-.032,0H92.377c-.2,0-.2,0-.2-.2V10.722c0-.2.1-.2.2-.2h2.755c.2,0,.2.1.2.2l.1,14.226a.266.266,0,0,1-.078.222A.279.279,0,0,1,95.164,25.248Zm8.371-.2-.034,0h-2.755c-.2,0-.2-.1-.2-.2V10.522c0-.2.1-.2.2-.2H103.6c.2,0,.2.1.2.2v2.387a5.694,5.694,0,0,1,.408-.5,5.61,5.61,0,0,1,3.979-2.088.906.906,0,0,0,.218-.041,1.06,1.06,0,0,1,.266-.048.313.313,0,0,1,.23.089.457.457,0,0,1,.115.447,1.189,1.189,0,0,0-.013.15v2.088c0,.2-.1.2-.2.2-.126-.009-.254-.014-.38-.014a5.02,5.02,0,0,0-2.58.71,4.077,4.077,0,0,0-2.04,3.582c-.068,1.662-.045,3.3-.023,4.881.011.785.023,1.59.023,2.38a.268.268,0,0,1-.08.222A.278.278,0,0,1,103.535,25.049ZM34.722,22.261h0a.223.223,0,0,1-.2-.2c-.078-.1-15.612-16.741-16.531-17.509-.13-.126-.222-.18-.307-.18-.12,0-.228.105-.407.279C17.136,4.787,1.046,21.864.843,22.162a.192.192,0,0,1-.119.065.067.067,0,0,1-.061-.039.264.264,0,0,1-.024-.126,16.383,16.383,0,0,1-.612-5.472A15.577,15.577,0,0,1,2.271,9.03,16.916,16.916,0,0,1,13.9.475,17.591,17.591,0,0,1,17.963,0,17.413,17.413,0,0,1,30.538,5.35a16.424,16.424,0,0,1,4.8,9.351,13.208,13.208,0,0,1,.2,2.884,22.708,22.708,0,0,1-.714,4.477C34.824,22.165,34.824,22.261,34.722,22.261ZM93.745,8.036A1.891,1.891,0,0,1,92.416,7.5a1.811,1.811,0,0,1-.549-1.354,2.01,2.01,0,0,1,1.939-1.989h.038a1.932,1.932,0,0,1,1.379.578,1.84,1.84,0,0,1,.52,1.411,1.879,1.879,0,0,1-.567,1.336,1.983,1.983,0,0,1-1.371.553Z"
-        />
-      </g>
-    </svg>
-  );
-};
-
-const TopSection = ({ children }: { children: ReactNode }) => {
-  return <div className="flex items-end text-left text-base">{children}</div>;
-};
-
-const CardsDashBoard = ({ children }: { children: ReactNode }) => {
-  return (
-    <>
-      <div className="flex mt-[34px] gap-6">
-        <p className="cursor-pointer text-[#222222] text-[14px] font-['Avenir_Next'] font-bold border-b-[2px] border-[#23CEFD]">
-          My debit cards
-        </p>
-        <p className="text-[#222222] text-[14px] font-['Avenir_Next'] opacity-30 cursor-not-allowed">
-          My company cards
-        </p>
-      </div>
-      <div className="w-full min-h-[767px] mt-4 border border-[#FCFCFC] rounded-lg shadow-[0_2px_12px_#00000014]">
-        {children}
-      </div>
-    </>
-  );
-};
-
-const AvailableBalance = () => {
-  return (
-    <div>
-      <p>Available balance</p>
-      <div className="flex items-center gap-3">
-        <span className="w-[40px] h-[24px] bg-[#01D167] text-[13px] inline-flex justify-center items-center text-white">
-          S$
-        </span>
-        <span className="text-[26px] font-bold">3,000</span>
-      </div>
-    </div>
-  );
-};
-
-const AddCardButton = () => {
-  return (
-    <button className="flex items-center ml-auto gap-2 bg-[#325BAF] font-semibold text-[13px] text-white">
-      <img src={AddIcon} />
-      New card
-    </button>
-  );
-};
+import TopSection, { AspireLogo } from "./dashboard/TopSection";
+import CardsDashBoard, { Carousel } from "./dashboard/Dashboard";
+import TransactionDetails, {
+  DetailPanel,
+} from "./dashboard/TransactionDetails";
+import { getCardInfomation } from "../api/apiClient";
+import { useEffect, useState } from "react";
 
 const FourDotsGroup = () => {
   return (
@@ -96,7 +23,16 @@ const Dot = () => (
   <span className="inline-block w-2.5 h-2.5 rounded-full bg-white" />
 );
 
-const VisaCard = ({ name, thru }: { name: string; thru: string }) => {
+const VisaCard = ({
+  name,
+  thru,
+  isActive,
+}: {
+  name: string;
+  thru: string;
+  isActive: boolean;
+}) => {
+  if (!isActive) return null;
   return (
     <div className="p-7 w-[414px] h-[248px] bg-[#01D167] rounded-lg flex flex-col justify-between">
       <AspireLogo className="text-white ml-auto w-[85px] h-[25px]" />
@@ -122,176 +58,57 @@ const VisaCard = ({ name, thru }: { name: string; thru: string }) => {
   );
 };
 
-const ActionItem = ({ logo, text }: { logo: string; text: string }) => {
-  return (
-    <div className="flex flex-col max-w-[62px] items-center justify-center text-[13px] text-[#0C365A] gap-2">
-      <button>
-        <img src={logo} className="w-8 h-8" />
-      </button>
-      {text}
-    </div>
-  );
-};
+export interface Transaction {
+  name: string;
+  date: string;
+  amount: number;
+}
 
-const Actions = () => {
-  return (
-    <div className="px-7 py-5 h-[116px] w-[414px] bg-[#EDF3FF] mt-[56px] rounded-2xl flex items-center justify-between">
-      <ActionItem logo={FreezeIcon} text="Freeze card" />
-      <ActionItem logo={SpendLimitIcon} text="Set spend limit" />
-      <ActionItem logo={GPayIcon} text="Add to GPay" />
-      <ActionItem logo={ReplaceIcon} text="Replace card" />
-      <ActionItem logo={DeactivateIcon} text="Cancel card" />
-    </div>
-  );
-};
+interface Card {
+  id: string;
+  name: string;
+  thru: string;
+  transactions: Transaction[];
+}
 
-const Transaction = ({
-  logo,
-  transactionText,
-}: {
-  logo: string;
-  transactionText: string;
-}) => {
-  return (
-    <div className="p-6 min-h-[100px]">
-      <div className="flex items-center gap-4">
-        <div className="w-[48px] h-[48px] flex items-center justify-center rounded-full bg-[#009DFF1A]">
-          <img src={logo} />
-        </div>
-        <div className="flex flex-col items-start">
-          <span className="text-[14px] font-semibold">Hamleys</span>
-          <span className="text-[13px] text-[#AAAAAA]">20 May 2020</span>
-        </div>
-        <span className="ml-auto text-[14px] font-bold text-[#01D167]">
-          + S$ 150
-        </span>
-        <img src={NextIcon} alt="Next" />
-      </div>
-      <div className="mt-3 pl-[64px] flex text-[#325BAF] text-[12px] font-semibold gap-2">
-        <div className="w-[24px] h-[20px] bg-[#325BAF] rounded-[12px] flex items-center justify-center">
-          <img className="w-[10px] h-[10px]" src={BusinessIcon} />
-        </div>
-        {transactionText}
-      </div>
-    </div>
-  );
-};
-
-const DetailPanel = ({
-  logo,
-  text,
-  disabled = false,
-}: {
-  logo: string;
-  text: string;
-  disabled?: boolean;
-}) => {
-  const [expanded, setExpanded] = useState(false);
-  return (
-    <div className="w-[366px] min-w-[50%]">
-      <div className="h-[72px] shadow-[0_0_8px_#0000000A] text-[14px] text-[#0C365A] flex items-center gap-3 p-7 rounded-lg  bg-[#F5F9FF]">
-        <img src={logo} />
-        {text}
-        <button
-          className="ml-auto"
-          onClick={() => setExpanded((prev) => !prev)}
-        >
-          <img src={expanded ? DownArrowIcon : UpArrowIcon} />
-        </button>
-      </div>
-      <div
-        className={`grid grid-rows-[0fr] transition-[grid-template-rows] ease-out duration-500 ${
-          expanded && !disabled && "grid-rows-[1fr]"
-        }`}
-      >
-        <div className="overflow-hidden border border-t-0 border-[#F0F0F0]">
-          <Transaction
-            logo={FileStorageIcon}
-            transactionText="Refund on debit card"
-          />
-          <Transaction
-            logo={FlightIcon}
-            transactionText="Charged to debit card"
-          />
-          <Transaction
-            logo={MegaphoneIcon}
-            transactionText="Charged to debit card"
-          />
-          <Transaction
-            logo={FileStorageIcon}
-            transactionText="Charged to debit card"
-          />
-          <div className="bg-[#DDFFEC] rounded-lg border border-[#DDFFEC] text-[#01D167] text-[13px] font-semibold px-[103px] py-4">
-            View all card transactions
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+interface CardInfo {
+  balance: string;
+  cards: Card[];
+}
 
 const Cards = () => {
+  const [data, setData] = useState<CardInfo>();
+  const [activeCard, setActiveCard] = useState<number>(0);
+  useEffect(() => {
+    async function fetchData() {
+      const card = await getCardInfomation();
+      if (card) setData(card as CardInfo);
+    }
+    fetchData();
+  }, []);
+  const { cards } = data || {};
   return (
     <main className="bg-white p-[3.75rem]">
-      <TopSection>
-        <AvailableBalance />
-        <AddCardButton />
-      </TopSection>
+      <TopSection />
       <CardsDashBoard>
-        <div className="px-10 py-16 h-full grid grid-cols-[auto_1fr]">
-          <div className="relative">
-            <div className="absolute top-[-24px] right-0 text-[14px] mb-3 text-[#01D167] font-bold flex justify-end gap-1">
-              <img src={EyeIcon} />
-              Show card number
-            </div>
-            <Carousel>
-              <VisaCard name="Mark Henry" thru="12/20" />
-              <VisaCard name="Phat Nguyen" thru="03/23" />
-              <VisaCard name="Jemery Lamp" thru="11/25" />
-            </Carousel>
-            <Actions />
-          </div>
-          <div className="flex flex-col gap-6 px-[40px]">
-            <DetailPanel disabled logo={DetailsIcon} text="Card details" />
-            <DetailPanel logo={TransactionsIcon} text="Recent transactions" />
-          </div>
-        </div>
+        <Carousel index={activeCard} selectCard={setActiveCard}>
+          {cards?.map((card, index) => (
+            <VisaCard
+              isActive={activeCard === index}
+              name={card.name}
+              thru={card.thru}
+            />
+          ))}
+        </Carousel>
+        <TransactionDetails>
+          <DetailPanel
+            transactions={cards?.length ? cards[activeCard].transactions : []}
+            logo={TransactionsIcon}
+            text="Recent transactions"
+          />
+        </TransactionDetails>
       </CardsDashBoard>
     </main>
-  );
-};
-
-const CarouselDot = ({
-  index,
-  isActive,
-  onClick,
-}: {
-  isActive: boolean;
-  index: number;
-  onClick: (idx: number) => void;
-}) => {
-  return (
-    <button
-      onClick={onClick.bind(null, index)}
-      className={`w-2 h-2 p-0 opacity-20 bg-[#01D167] rounded-lg ${
-        isActive && "w-4 opacity-100"
-      }`}
-    />
-  );
-};
-
-const Carousel = ({ children }: { children: ReactNode }) => {
-  const [index, setIndex] = useState(0);
-  const onClick = (idx: number) => setIndex(idx);
-  return (
-    <div className="flex flex-col gap-3">
-      {Children.toArray(children)[index]}
-      <div className="flex items-center justify-center gap-2">
-        {Children.map(children, (_, idx) => (
-          <CarouselDot isActive={index === idx} index={idx} onClick={onClick} />
-        ))}
-      </div>
-    </div>
   );
 };
 
