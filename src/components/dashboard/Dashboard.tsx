@@ -1,4 +1,4 @@
-import { Children, ReactNode } from "react";
+import { Children, ReactNode, useState } from "react";
 import EyeIcon from "../../assets/remove_red_eye.svg";
 import DeactivateIcon from "../../assets/Deactivate card.svg";
 import GPayIcon from "../../assets/GPay.svg";
@@ -48,6 +48,38 @@ const Actions = () => {
   );
 };
 
+const getAnimatingCarouselCss = (
+  index: number,
+  direction?: "next" | "previous"
+) => {
+  if (direction === undefined) {
+    return {
+      [index - 1]: "translate-x-[50%] opacity-10",
+      [index]: "",
+      [index + 1]: "translate-x-[-50%] opacity-10",
+    };
+  }
+
+  if (direction === "next") {
+    return {
+      [index]:
+        "transition-all duration-400 ease-out translate-x-[0%] opacity-100",
+    };
+  }
+
+  if (direction === "previous") {
+    return {
+      [index]:
+        "transition-all duration-400 ease-out translate-x-[0%] opacity-100",
+    };
+  }
+
+  return {
+    [index]:
+      "translate-x-[50%] opacity-10 transition-all translate-x-[0%] opacity-100",
+  };
+};
+
 export const Carousel = ({
   children,
   index,
@@ -57,6 +89,9 @@ export const Carousel = ({
   index: number;
   selectCard: (id: number) => void;
 }) => {
+  const [animating, setAnimating] = useState<"next" | "previous" | undefined>(
+    undefined
+  );
   return (
     <div className="relative">
       <div className="absolute top-[-24px] right-0 text-[14px] mb-3 text-[#01D167] font-bold flex justify-end gap-1">
@@ -64,14 +99,31 @@ export const Carousel = ({
         Show card number
       </div>
       <div className="flex flex-col gap-3">
-        {children}
+        <div className="grid grid-cols-1 grid-rows-1">
+          {Children.map(children, (child, idx) => {
+            const css = getAnimatingCarouselCss(index, animating);
+            return (
+              <div
+                onTransitionEnd={() => setAnimating(undefined)}
+                className={`${css[idx]}`}
+                key={idx}
+              >
+                {child}
+              </div>
+            );
+          })}
+        </div>
         <div className="flex items-center justify-center gap-2">
           {Array.from(Array(Children.count(children))).map((_, idx) => (
             <CarouselDot
               key={idx}
               isActive={index === idx}
               index={idx}
-              onClick={() => selectCard(idx)}
+              onClick={() => {
+                if (idx < index) setAnimating("previous");
+                else setAnimating("next");
+                selectCard(idx);
+              }}
             />
           ))}
         </div>
