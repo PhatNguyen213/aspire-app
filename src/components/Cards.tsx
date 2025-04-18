@@ -32,9 +32,13 @@ const VisaCard = ({
   thru: string;
   isActive: boolean;
 }) => {
-  if (!isActive) return null;
+  //   if (!isActive) return null;
   return (
-    <div className="p-7 w-[414px] h-[248px] bg-[#01D167] rounded-lg flex flex-col justify-between">
+    <div
+      className={`${
+        !isActive && "hidden"
+      } p-7 w-[414px] h-[248px] bg-[#01D167] rounded-lg flex flex-col justify-between`}
+    >
       <AspireLogo className="text-white ml-auto w-[85px] h-[25px]" />
       <p className="text-left text-white font-bold tracking-[0.58px] text-2xl">
         {name}

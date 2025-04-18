@@ -1,8 +1,6 @@
 import DetailsIcon from "../../assets/card-details.svg";
 import BusinessIcon from "../../assets/business-and-finance.svg";
 import FileStorageIcon from "../../assets/file-storage.svg";
-// import FlightIcon from "../../assets/flights.svg";
-// import MegaphoneIcon from "../../assets/megaphone.svg";
 import NextIcon from "../../assets/next.svg";
 import DownArrowIcon from "../../assets/down-arrow.svg";
 import UpArrowIcon from "../../assets/up-arrow.svg";
@@ -83,19 +81,6 @@ export const DetailPanel = ({
               logo={FileStorageIcon}
             />
           ))}
-          {/* <Transaction logo={FileStorageIcon} />
-          <Transaction
-            logo={FlightIcon}
-            transactionText="Charged to debit card"
-          />
-          <Transaction
-            logo={MegaphoneIcon}
-            transactionText="Charged to debit card"
-          />
-          <Transaction
-            logo={FileStorageIcon}
-            transactionText="Charged to debit card"
-          /> */}
           <div className="bg-[#DDFFEC] rounded-lg border border-[#DDFFEC] text-[#01D167] text-[13px] font-semibold px-[103px] py-4">
             View all card transactions
           </div>

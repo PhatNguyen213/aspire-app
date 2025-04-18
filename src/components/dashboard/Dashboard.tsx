@@ -66,11 +66,12 @@ export const Carousel = ({
       <div className="flex flex-col gap-3">
         {children}
         <div className="flex items-center justify-center gap-2">
-          {Array(Children.count(children)).map((_, idx) => (
+          {Array.from(Array(Children.count(children))).map((_, idx) => (
             <CarouselDot
+              key={idx}
               isActive={index === idx}
               index={idx}
-              onClick={() => selectCard(index)}
+              onClick={() => selectCard(idx)}
             />
           ))}
         </div>
