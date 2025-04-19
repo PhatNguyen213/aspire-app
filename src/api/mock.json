@@ -7,6 +7,7 @@
         "name": "Mark Henry",
         "number": "**** **** **** 2020",
         "thru": "12/20",
+        "freeze": false,
         "transactions": [
           {
             "name": "Hamleys",
@@ -35,6 +36,7 @@
         "name": "Phat Nguyen",
         "number": "**** **** **** 1234",
         "thru": "02/22",
+        "freeze": false,
         "transactions": [
           {
             "name": "Hello",

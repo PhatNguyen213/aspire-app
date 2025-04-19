@@ -1,10 +1,5 @@
 import { Children, ReactNode, useState } from "react";
 import EyeIcon from "../../assets/remove_red_eye.svg";
-import DeactivateIcon from "../../assets/Deactivate card.svg";
-import GPayIcon from "../../assets/GPay.svg";
-import FreezeIcon from "../../assets/Freeze card.svg";
-import ReplaceIcon from "../../assets/Replace card.svg";
-import SpendLimitIcon from "../../assets/Set spend limit.svg";
 
 const CarouselDot = ({
   index,
@@ -22,29 +17,6 @@ const CarouselDot = ({
         isActive && "w-4 opacity-100"
       }`}
     />
-  );
-};
-
-const ActionItem = ({ logo, text }: { logo: string; text: string }) => {
-  return (
-    <div className="flex flex-col max-w-[62px] items-center justify-center text-[13px] text-[#0C365A] gap-2">
-      <button>
-        <img src={logo} className="w-8 h-8" />
-      </button>
-      {text}
-    </div>
-  );
-};
-
-const Actions = () => {
-  return (
-    <div className="px-7 py-5 h-[116px] w-[414px] bg-[#EDF3FF] mt-[56px] rounded-2xl flex items-center justify-between">
-      <ActionItem logo={FreezeIcon} text="Freeze card" />
-      <ActionItem logo={SpendLimitIcon} text="Set spend limit" />
-      <ActionItem logo={GPayIcon} text="Add to GPay" />
-      <ActionItem logo={ReplaceIcon} text="Replace card" />
-      <ActionItem logo={DeactivateIcon} text="Cancel card" />
-    </div>
   );
 };
 
@@ -128,7 +100,6 @@ export const Carousel = ({
           ))}
         </div>
       </div>
-      <Actions />
     </div>
   );
 };
