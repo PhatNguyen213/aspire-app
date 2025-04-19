@@ -5,6 +5,11 @@
 - Using TailwindCSS for styling.
 - Layout: use Grid and Flexbox for the page's layout.
 
+#### How to run
+
+1. npm install
+2. npm run dev
+
 #### Component design
 
 - Composition: examples are `CardDashboard` and `Carousel` components.
