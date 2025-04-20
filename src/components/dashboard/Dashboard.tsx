@@ -26,11 +26,11 @@ const withDefaultClass = (extraClass?: string) =>
 const getAnimatingCarouselCss = (direction?: "next" | "previous") => {
   if (direction === "next")
     return withDefaultClass(
-      "transition-all duration-400 ease-out translate-x-[50%] opacity-0"
+      "transition-all duration-200 ease-out translate-x-[30%] opacity-0"
     );
   if (direction === "previous")
     return withDefaultClass(
-      "transition-all duration-400 ease-out translate-x-[-50%] opacity-0"
+      "transition-all duration-200 ease-out translate-x-[-30%] opacity-0"
     );
   return withDefaultClass();
 };
