@@ -20,36 +20,19 @@ const CarouselDot = ({
   );
 };
 
-const getAnimatingCarouselCss = (
-  index: number,
-  direction?: "next" | "previous"
-) => {
-  if (direction === undefined) {
-    return {
-      [index - 1]: "translate-x-[50%] opacity-10",
-      [index]: "",
-      [index + 1]: "translate-x-[-50%] opacity-10",
-    };
-  }
+const withDefaultClass = (extraClass?: string) =>
+  `col-start-1 col-end-1 row-start-1 row-end-1 ${extraClass || ""}`;
 
-  if (direction === "next") {
-    return {
-      [index]:
-        "transition-all duration-400 ease-out translate-x-[0%] opacity-100",
-    };
-  }
-
-  if (direction === "previous") {
-    return {
-      [index]:
-        "transition-all duration-400 ease-out translate-x-[0%] opacity-100",
-    };
-  }
-
-  return {
-    [index]:
-      "translate-x-[50%] opacity-10 transition-all translate-x-[0%] opacity-100",
-  };
+const getAnimatingCarouselCss = (direction?: "next" | "previous") => {
+  if (direction === "next")
+    return withDefaultClass(
+      "transition-all duration-400 ease-out translate-x-[50%] opacity-0"
+    );
+  if (direction === "previous")
+    return withDefaultClass(
+      "transition-all duration-400 ease-out translate-x-[-50%] opacity-0"
+    );
+  return withDefaultClass();
 };
 
 export const Carousel = ({
@@ -71,19 +54,40 @@ export const Carousel = ({
         Show card number
       </div>
       <div className="flex flex-col gap-3">
-        <div className="grid grid-cols-1 grid-rows-1">
+        <div className="grid place-items-center">
+          <div
+            onTransitionEnd={() => setAnimating(undefined)}
+            className={`w-[414px] h-[248px] bg-[#01D167] rounded-lg ${
+              animating === "next"
+                ? withDefaultClass(
+                    "transition-all duration-400 ease-out translate-x-[0%] opacity-100"
+                  )
+                : withDefaultClass("translate-x-[-50%] opacity-0")
+            }`}
+          >
+            {animating === "next" ? Children.toArray(children)[index] : null}
+          </div>
           {Children.map(children, (child, idx) => {
-            const css = getAnimatingCarouselCss(index, animating);
             return (
-              <div
-                onTransitionEnd={() => setAnimating(undefined)}
-                className={`${css[idx]}`}
-                key={idx}
-              >
+              <div className={getAnimatingCarouselCss(animating)} key={idx}>
                 {child}
               </div>
             );
           })}
+          <div
+            onTransitionEnd={() => setAnimating(undefined)}
+            className={`w-[414px] h-[248px] bg-[#01D167] rounded-lg ${
+              animating === "previous"
+                ? withDefaultClass(
+                    "transition-all duration-400 ease-out translate-x-[0%] opacity-100"
+                  )
+                : withDefaultClass("translate-x-[50%] opacity-0")
+            }`}
+          >
+            {animating === "previous"
+              ? Children.toArray(children)[index]
+              : null}
+          </div>
         </div>
         <div className="flex items-center justify-center gap-2">
           {Array.from(Array(Children.count(children))).map((_, idx) => (
